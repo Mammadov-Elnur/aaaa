@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="header(active)" class="site-header">
+    <div class="container nav">
+        <a th:href="@{/}" class="brand">Baku<span>Guide</span></a>
+        <nav>
+            <a th:href="@{/}" th:classappend="${active == 'home'} ? 'active'">Home</a>
+            <a th:href="@{/landmarks}" th:classappend="${active == 'landmarks'} ? 'active'">Landmarks</a>
+            <a th:href="@{/contact}" class="btn btn-small" th:classappend="${active == 'contact'} ? 'active'">Book a Guide</a>
+        </nav>
+    </div>
+</header>
+
+<footer th:fragment="footer" class="site-footer">
+    <div class="container">
+        <p>&copy; 2026 BakuGuide &mdash; The City of Winds awaits you.</p>
+    </div>
+</footer>
+
+</body>
+</html>

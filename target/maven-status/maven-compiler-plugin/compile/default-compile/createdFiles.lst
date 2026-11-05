@@ -1,0 +1,7 @@
+com\example\bakuguide\DataLoader.class
+com\example\bakuguide\model\Landmark.class
+com\example\bakuguide\BakuGuideApplication.class
+com\example\bakuguide\repository\TourInquiryRepository.class
+com\example\bakuguide\repository\LandmarkRepository.class
+com\example\bakuguide\model\TourInquiry.class
+com\example\bakuguide\controller\MainController.class

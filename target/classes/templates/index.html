@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baku City Tour &amp; Landmark Guide</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: header('home')}"></div>
+
+<section class="hero">
+    <div class="container hero-content">
+        <h1>Discover Baku</h1>
+        <p>Ancient walls, flaming towers and the Caspian breeze, all in one unforgettable city.</p>
+        <div class="hero-actions">
+            <a th:href="@{/landmarks}" class="btn">Explore Landmarks</a>
+            <a th:href="@{/contact}" class="btn btn-outline">Request a Guided Tour</a>
+        </div>
+    </div>
+</section>
+
+<section class="container welcome">
+    <h2>Welcome, visitor!</h2>
+    <p>Salam and welcome to Baku, Azerbaijan's capital, where medieval alleys meet futuristic
+       architecture. Use this guide to plan your route, learn the stories behind each site,
+       and book a local guide who knows the city by heart.</p>
+</section>
+
+<section class="container">
+    <h2 class="section-title">Featured Attractions</h2>
+    <div class="grid">
+        <article class="card" th:each="l : ${featured}">
+            <div class="card-img">
+                <img th:src="@{${l.imageUrl}}" th:alt="${l.name}" loading="lazy"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="card-body">
+                <span class="badge" th:text="${l.category}">Category</span>
+                <h3 th:text="${l.name}">Name</h3>
+                <p th:text="${l.description}">Description</p>
+                <small class="loc" th:text="${l.location}">Location</small>
+            </div>
+        </article>
+    </div>
+    <p class="center"><a th:href="@{/landmarks}" class="btn">See all landmarks</a></p>
+</section>
+
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

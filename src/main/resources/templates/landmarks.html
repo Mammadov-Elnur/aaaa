@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Landmarks | Baku Guide</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: header('landmarks')}"></div>
+
+<main class="container">
+    <h1 class="page-title">Baku Landmarks</h1>
+
+    <form th:action="@{/landmarks}" method="get" class="filters">
+        <input type="text" name="q" th:value="${q}" placeholder="Search landmarks...">
+        <select name="category">
+            <option value="">All categories</option>
+            <option th:each="c : ${categories}" th:value="${c}" th:text="${c}"
+                    th:selected="${c == selectedCategory}"></option>
+        </select>
+        <select name="sort">
+            <option value="name-asc"  th:selected="${sort == 'name-asc'}">Name (A&ndash;Z)</option>
+            <option value="name-desc" th:selected="${sort == 'name-desc'}">Name (Z&ndash;A)</option>
+            <option value="category"  th:selected="${sort == 'category'}">Category</option>
+        </select>
+        <button type="submit" class="btn">Apply</button>
+        <a th:href="@{/landmarks}" class="btn btn-outline-dark">Reset</a>
+    </form>
+
+    <p class="results" th:text="${#lists.size(landmarks)} + ' landmark(s) found'"></p>
+
+    <div class="grid" th:if="${!landmarks.isEmpty()}">
+        <article class="card" th:each="l : ${landmarks}">
+            <div class="card-img">
+                <img th:src="@{${l.imageUrl}}" th:alt="${l.name}" loading="lazy"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="card-body">
+                <span class="badge" th:text="${l.category}">Category</span>
+                <h3 th:text="${l.name}">Name</h3>
+                <p th:text="${l.description}">Description</p>
+                <small class="loc" th:text="${l.location}">Location</small>
+            </div>
+        </article>
+    </div>
+
+    <p class="empty" th:if="${landmarks.isEmpty()}">No landmarks match your search.</p>
+</main>
+
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>
